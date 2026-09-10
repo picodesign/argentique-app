@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 390, "h": 844, "title": "1. Caméra" },
+    { "file": "Pellicule.dc.html", "x": 470, "y": 0, "w": 390, "h": 844, "title": "2. Pellicule en cours" },
+    { "file": "Developpement.dc.html", "x": 940, "y": 0, "w": 390, "h": 844, "title": "3. Développement" },
+    { "file": "Galerie.dc.html", "x": 1410, "y": 0, "w": 390, "h": 844, "title": "4. Galerie" },
+    { "file": "Archives.dc.html", "x": 1880, "y": 0, "w": 390, "h": 844, "title": "5. Archives" }
+  ],
+  "annotations": [
+    { "id": "direction-note", "x": 0, "y": -130, "w": 520, "text": "Direction — papier & encre\nPolice système (native) pour l'interface, Newsreader (serif) pour les titres.\nUn seul accent, utilisé avec parcimonie." }
+  ],
+  "launch": { "view": "canvas" }
+}

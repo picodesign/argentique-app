@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500&display=swap">
+  <style>
+    :root {
+      --ink: #1B1A17;
+      --crema: #F6F2E9;
+      --accent: {{accent}};
+      --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-ui); }
+    a { color: var(--accent); } a:hover { color: #92381f; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: radial-gradient(120% 90% at 32% 18%, #8a7358 0%, #5b4a37 42%, #241d16 100%); font-family: var(--font-ui);">
+
+  <!-- subtle film grain -->
+  <svg style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.14; mix-blend-mode: overlay;">
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <!-- vignette -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 40%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);"></div>
+
+  <!-- top pellicule tag -->
+  <div style="position: absolute; top: 58px; left: 24px; display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: rgba(20,17,13,0.45); backdrop-filter: blur(6px);">
+    <div style="width: 6px; height: 6px; border-radius: 999px; background: var(--accent);"></div>
+    <span style="font-family: var(--font-ui); font-size: 12px; letter-spacing: 0.08em; font-weight: 600; color: #F6F2E9; text-transform: uppercase;">Pellicule N°14</span>
+  </div>
+
+  <!-- bottom control zone -->
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 28px 44px; display: flex; flex-direction: column; align-items: center; gap: 22px;">
+
+    <div style="text-align: center;">
+      <div style="font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: 22px; color: #F6F2E9; text-shadow: 0 1px 8px rgba(0,0,0,0.5);">22 photos restantes</div>
+    </div>
+
+    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+
+      <!-- pellicule/grid link -->
+      <div style="width: 48px; height: 48px; border-radius: 999px; background: rgba(20,17,13,0.4); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6F2E9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1.2"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.2"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.2"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.2"/>
+        </svg>
+      </div>
+
+      <!-- shutter -->
+      <div style="width: 78px; height: 78px; border-radius: 999px; background: rgba(255,255,255,0.14); border: 2px solid rgba(255,255,255,0.55); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 62px; height: 62px; border-radius: 999px; background: #FFFDF8;"></div>
+      </div>
+
+      <!-- flash toggle -->
+      <div style="width: 48px; height: 48px; border-radius: 999px; background: rgba(20,17,13,0.4); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F6F2E9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2 4 14h6l-1 8 9-12h-6z"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#B4472F","options":["#B4472F","#8A6D3B","#4E6E58"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#B4472F' };
+  }
+}
+</script>
+</body>
+</html>

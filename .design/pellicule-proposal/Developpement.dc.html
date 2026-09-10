@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500&display=swap">
+  <style>
+    :root {
+      --ink: #1B1A17;
+      --ink-soft: #6E6A60;
+      --crema: #F6F2E9;
+      --hairline: #DED8CA;
+      --accent: {{accent}};
+      --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: var(--accent); } a:hover { color: #92381f; }
+  </style>
+</helmet>
+
+<div style="width: 390px; height: 844px; background: var(--crema); font-family: var(--font-ui); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 40px;">
+
+  <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 26px;">
+    <path d="M6 2h12"/>
+    <path d="M6 22h12"/>
+    <path d="M8 2c0 4 8 4 8 8s-8 4-8 8"/>
+    <path d="M16 2c0 4-8 4-8 8s8 4 8 8"/>
+  </svg>
+
+  <div style="font-family: var(--font-serif); font-weight: 600; font-size: 24px; color: var(--ink); margin-bottom: 12px;">En développement</div>
+
+  <div style="font-size: 15px; line-height: 22px; color: var(--ink-soft); text-align: center; max-width: 260px; margin-bottom: 40px;">Tes 22 photos seront prêtes demain à 8h00.</div>
+
+  <div style="width: 200px; height: 3px; border-radius: 999px; background: var(--hairline); overflow: hidden; margin-bottom: 12px;">
+    <div style="width: 62%; height: 100%; background: var(--accent);"></div>
+  </div>
+
+  <div style="font-size: 13px; color: var(--ink-soft); margin-bottom: 90px;">Encore quelques heures</div>
+
+  <div style="font-size: 14px; font-weight: 600; color: var(--accent);">Voir les archives</div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#B4472F","options":["#B4472F","#8A6D3B","#4E6E58"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#B4472F' };
+  }
+}
+</script>
+</body>
+</html>
