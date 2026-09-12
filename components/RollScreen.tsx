@@ -1,19 +1,17 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, useColorScheme, View } from 'react-native';
-import { colors, ROLL_SIZE, serifFont } from '../theme';
-import type { Roll } from '../lib/roll';
-import { remainingShots } from '../lib/roll';
+import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { colors, monoFont, ROLL_SIZE, serifFont } from '../theme';
+import type { Roll } from '../lib/pellicule';
+import { remainingShots } from '../lib/pellicule';
 
 type Props = {
   roll: Roll;
-  onClose: () => void;
 };
 
 // Teintes discrètes pour représenter des clichés distincts sans les montrer —
 // les photos ne sont jamais visibles avant développement.
 const TONES = ['#C89A6A', '#A8785A', '#8E9A7C', '#B98C63', '#7C8B98', '#C4A67C', '#9C8468', '#B2795E'];
 
-export default function RollScreen({ roll, onClose }: Props) {
+export default function RollScreen({ roll }: Props) {
   const isDark = useColorScheme() === 'dark';
   const theme = isDark ? colors.dark : colors.light;
   const remaining = remainingShots(roll);
@@ -21,14 +19,17 @@ export default function RollScreen({ roll, onClose }: Props) {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Pressable style={styles.back} onPress={onClose} hitSlop={10}>
-        <Ionicons name="chevron-back" size={22} color={theme.ink} />
-      </Pressable>
-
-      <Text style={[styles.label, { color: theme.inkSoft }]}>Pellicule N°{roll.rollNumber}</Text>
+      <Text style={[styles.label, { color: theme.inkSoft }]}>EN COURS</Text>
       <Text style={[styles.title, { color: theme.ink, fontFamily: serifFont }]}>
-        {remaining > 0 ? `${remaining} photo${remaining > 1 ? 's' : ''} restante${remaining > 1 ? 's' : ''}` : 'Pellicule terminée'}
+        Pellicule N°{roll.rollNumber}
       </Text>
+
+      <View style={[styles.infoCard, { backgroundColor: theme.surface }]}>
+        <View style={styles.infoRow}>
+          <Text style={[styles.infoKey, { color: theme.inkSoft }]}>RESTANTES</Text>
+          <Text style={[styles.infoValue, { color: theme.ink }]}>{remaining} / {ROLL_SIZE}</Text>
+        </View>
+      </View>
 
       <View style={styles.grid}>
         {Array.from({ length: ROLL_SIZE }).map((_, i) => {
@@ -47,12 +48,13 @@ export default function RollScreen({ roll, onClose }: Props) {
         })}
       </View>
 
-      <View style={styles.footer}>
-        <View style={[styles.footerDot, { backgroundColor: theme.accent }]} />
-        <Text style={[styles.footerText, { color: theme.inkSoft, fontFamily: serifFont }]}>
-          Les photos d'aujourd'hui seront visibles demain à 8h00.
-        </Text>
-      </View>
+      <Text style={[styles.footerText, { color: theme.inkFaint, fontFamily: serifFont }]}>
+        {remaining > 0
+          ? 'Vous ne verrez rien avant demain matin. C’est la seule chose que la pellicule vous demande.'
+          : 'Pellicule pleine. Le développement commence — rendez-vous demain matin.'}
+      </Text>
+
+      <Text style={[styles.navHint, { color: theme.inkSoft }]}>↓ APPAREIL</Text>
     </View>
   );
 }
@@ -64,20 +66,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 40,
   },
-  back: {
-    marginBottom: 20,
-  },
   label: {
-    fontSize: 12,
-    letterSpacing: 0.6,
-    textTransform: 'uppercase',
-    fontWeight: '600',
-    marginBottom: 6,
+    fontFamily: monoFont,
+    fontSize: 11,
+    letterSpacing: 1.8,
+    marginBottom: 8,
   },
   title: {
-    fontWeight: '600',
-    fontSize: 28,
-    marginBottom: 24,
+    fontWeight: '400',
+    fontSize: 34,
+    marginBottom: 22,
+    letterSpacing: -0.4,
+  },
+  infoCard: {
+    borderRadius: 12,
+    marginBottom: 22,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+  },
+  infoKey: {
+    fontFamily: monoFont,
+    fontSize: 13,
+    letterSpacing: 0.6,
+  },
+  infoValue: {
+    fontSize: 16,
   },
   grid: {
     flexDirection: 'row',
@@ -87,25 +104,18 @@ const styles = StyleSheet.create({
   cell: {
     width: '13.6%',
     aspectRatio: 1,
-    borderRadius: 4,
-  },
-  footer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 8,
-  },
-  footerDot: {
-    width: 5,
-    height: 5,
     borderRadius: 3,
-    marginTop: 6,
   },
   footerText: {
-    flex: 1,
-    fontStyle: 'italic',
-    fontSize: 14,
-    lineHeight: 20,
+    marginTop: 26,
+    fontSize: 17,
+    lineHeight: 25,
+  },
+  navHint: {
+    marginTop: 'auto',
+    alignSelf: 'center',
+    fontFamily: monoFont,
+    fontSize: 10,
+    letterSpacing: 2,
   },
 });
